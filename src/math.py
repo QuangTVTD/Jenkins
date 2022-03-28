@@ -21,6 +21,7 @@ def subtract(x: int, y: int) -> int:
     Returns:
                     int: resut of x subtract y
     """
+    
     return x - y
 
 
