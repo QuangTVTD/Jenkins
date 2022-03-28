@@ -1,3 +1,6 @@
+from unittest import result
+
+
 def add(x: int, y: int) -> int:
     """add two numbers together
 
@@ -21,7 +24,8 @@ def subtract(x: int, y: int) -> int:
     Returns:
                     int: resut of x subtract y
     """
-    return x - y
+    result = x - y
+    return result
 
 
 def multiply(x: int, y: int) -> int:
