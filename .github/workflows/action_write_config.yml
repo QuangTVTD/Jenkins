@@ -1,5 +1,11 @@
 name: Write config fle
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   write_config:
     runs-on: ubuntu-latest
@@ -7,19 +13,12 @@ jobs:
       # Checkout the branch
       - name: checkout
         uses: actions/checkout@v2
-
-#       - name: save current date
-#         run: |
-#           # do some operation that changes a file in the git repo
-#           name=quang > config.ini
-#           age=24 > config.ini
       - name: write config
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          envkey_DEBUG: false
-          envkey_SOME_API_KEY: "123456abcdef"
-          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          some_other_variable: foobar
+          envkey_max_simultaneous_api_calls: 1000
+          envkey_pull_secrets_from_cloud: "True"
+          envkey_delete_staging_tables_from_snowflake: "True"
           file_name: config.ini
           fail_on_empty: false
 
@@ -27,7 +26,7 @@ jobs:
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
           git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+          git config user.email "<Test@gmail.com>"
 
       - name: commit
         run: |
