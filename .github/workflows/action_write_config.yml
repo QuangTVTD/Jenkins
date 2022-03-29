@@ -21,7 +21,7 @@ jobs:
           envkey_pull_secrets_from_cloud: "True"
           envkey_delete_staging_tables_from_snowflake: "True"
           file_name: config.ini
-#           fail_on_empty: true
+          fail_on_empty: false
       # setup git config
       - name: setup git config
         run: |
@@ -30,11 +30,14 @@ jobs:
           git config user.email "<Test@gmail.com>"
       # commit new config to repo
       - name: commit
+        id: commit
         run: |
           # Stage the file, commit and push
           git add config.ini
           git commit -m "create config file"
           git push origin main
+      - name: Print outcome
+        run: echo "${{ steps.commit.outcome }}"
       # create Docker images and push into a ECR repository
       - name: build and push to ECR repository
         uses: docker://ghcr.io/kciter/aws-ecr-action:latest
