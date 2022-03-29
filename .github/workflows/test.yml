@@ -14,8 +14,8 @@ jobs:
       - uses: QuangTVTD/Jenkins@main
         with:
           path: 'json.json'
-          contents:
-            hello: 'world'
+          data:
+            'hello''world'
       - uses: actions/upload-artifact@v1
         with:
           name: json
