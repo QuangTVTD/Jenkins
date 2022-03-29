@@ -15,20 +15,8 @@ jobs:
         with:
           path: 'json.json'
           contents:
-            hello: 'world'
-      - uses: QuangTVTD/Jenkins@master
-        with:
-          path: 'yaml.yml'
-          contents:
-            - foo: 'bar'
-              data:
-                - 1
-                - 2
+            'hello'':''world'
       - uses: actions/upload-artifact@v1
         with:
           name: json
           path: 'json.json'
-      - uses: actions/upload-artifact@v1
-        with:
-          name: yaml
-          path: 'yaml.yml'
