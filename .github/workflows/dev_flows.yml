@@ -2,10 +2,10 @@ name: Dev workflows
 on:
   push:
     branches:
-      - dev
+      - dev-test
   pull_request:
     branches:
-      - dev
+      - dev-test
 jobs:
   write_config:
     runs-on: ubuntu-latest
@@ -20,6 +20,8 @@ jobs:
           envkey_max_simultaneous_api_calls: 1000
           envkey_pull_secrets_from_cloud: "True"
           envkey_delete_staging_tables_from_snowflake: "True"
+          envkey_AWS_REGION_NAME: "us-west-2"
+          envkey_STATE_BUCKET_NAME: "cerebral-data-us-west-2-lambda-bucket"
           file_name: config.ini
           fail_on_empty: false
       # setup git config
@@ -28,6 +30,20 @@ jobs:
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
           git config user.name "GitHub Actions Bot"
           git config user.email "<Test@gmail.com>"
+      # create Docker images and push into a ECR repository
+#       - name: build and push to ECR repository
+#         uses: docker://ghcr.io/kciter/aws-ecr-action:latest
+#         with:
+#           access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+#           repo: docker/repo
+#           region: ap-northeast-2
+#           tags: latest,${{ github.sha }}
+#           create_repo: true
+#           image_scanning_configuration: true
+#           set_repo_policy: true
+#           repo_policy_file: repo-policy.json
       # commit new config to repo
       - name: commit
         id: commit
@@ -35,20 +51,4 @@ jobs:
           # Stage the file, commit and push
           git add config.ini
           git commit -m "create config file"
-          git push origin dev
-      - name: Print outcome
-        run: echo "${{ steps.commit.outcome }}"
-      # create Docker images and push into a ECR repository
-      - name: build and push to ECR repository
-        uses: docker://ghcr.io/kciter/aws-ecr-action:latest
-        with:
-          access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          repo: docker/repo
-          region: ap-northeast-2
-          tags: latest,${{ github.sha }}
-          create_repo: true
-          image_scanning_configuration: true
-          set_repo_policy: true
-          repo_policy_file: repo-policy.json
+          git push origin dev-test
