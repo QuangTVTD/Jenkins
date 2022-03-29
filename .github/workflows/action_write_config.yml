@@ -20,6 +20,7 @@ jobs:
           envkey_max_simultaneous_api_calls: 1000
           envkey_pull_secrets_from_cloud: "True"
           envkey_delete_staging_tables_from_snowflake: "True"
+          envkey_AWS_REGION_NAME: "us-west-2"
           file_name: config.ini
           fail_on_empty: false
       # setup git config
@@ -29,19 +30,19 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<Test@gmail.com>"
       # create Docker images and push into a ECR repository
-      - name: build and push to ECR repository
-        uses: docker://ghcr.io/kciter/aws-ecr-action:latest
-        with:
-          access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          repo: docker/repo
-          region: ap-northeast-2
-          tags: latest,${{ github.sha }}
-          create_repo: true
-          image_scanning_configuration: true
-          set_repo_policy: true
-          repo_policy_file: repo-policy.json
+#       - name: build and push to ECR repository
+#         uses: docker://ghcr.io/kciter/aws-ecr-action:latest
+#         with:
+#           access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+#           repo: docker/repo
+#           region: ap-northeast-2
+#           tags: latest,${{ github.sha }}
+#           create_repo: true
+#           image_scanning_configuration: true
+#           set_repo_policy: true
+#           repo_policy_file: repo-policy.json
       # commit new config to repo
       - name: commit
         id: commit
