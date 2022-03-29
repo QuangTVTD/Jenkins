@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: QuangTVTD/Jenkins@master
+      - uses: QuangTVTD/Jenkins@main
         with:
           path: 'json.json'
           contents:
