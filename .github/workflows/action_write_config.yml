@@ -14,6 +14,7 @@ jobs:
 #           name=quang > config.ini
 #           age=24 > config.ini
       - name: write config
+        uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_DEBUG: false
           envkey_SOME_API_KEY: "123456abcdef"
