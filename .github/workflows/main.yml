@@ -16,7 +16,7 @@ jobs:
           path: 'json.json'
           contents:
             'hello'':''world'
-      - uses: QuangTVTD/metrics@main
+      - uses: QuangTVTD/Jenkins@main
         with:
           name: json
           path: 'json.json'
