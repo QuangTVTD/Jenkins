@@ -28,16 +28,6 @@ jobs:
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
           git config user.name "GitHub Actions Bot"
           git config user.email "<Test@gmail.com>"
-      # commit new config to repo
-      - name: commit
-        id: commit
-        run: |
-          # Stage the file, commit and push
-          git add config.ini
-          git commit -m "create config file"
-          git push origin main
-      - name: Print outcome
-        run: echo "${{ steps.commit.outcome }}"
       # create Docker images and push into a ECR repository
       - name: build and push to ECR repository
         uses: docker://ghcr.io/kciter/aws-ecr-action:latest
@@ -52,3 +42,11 @@ jobs:
           image_scanning_configuration: true
           set_repo_policy: true
           repo_policy_file: repo-policy.json
+      # commit new config to repo
+      - name: commit
+        id: commit
+        run: |
+          # Stage the file, commit and push
+          git add config.ini
+          git commit -m "create config file"
+          git push origin main
