@@ -16,7 +16,3 @@ jobs:
           path: 'json.json'
           contents:
             'hello'':''world'
-      - uses: actions/upload-artifact@v1
-        with:
-          name: json
-          path: 'json.json'
