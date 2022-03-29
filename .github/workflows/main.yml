@@ -16,7 +16,7 @@ jobs:
           path: 'json.json'
           contents:
             'hello'':''world'
-      - uses: actions/upload-artifact@v1
+      - uses: QuangTVTD/metrics@main
         with:
           name: json
           path: 'json.json'
