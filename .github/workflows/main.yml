@@ -38,11 +38,32 @@ jobs:
       - name: Install pipenv
         run: |
           python -m pip install --upgrade pipenv wheel
-      - id: cache-pipenv
-        uses: actions/cache@v1
+      # - id: cache-pipenv
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ~/.local/share/virtualenvs
+      #     key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+      - uses: antfu/write-file-action@master
         with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+          path: 'json.json'
+          contents:
+            hello: 'world'
+      - uses: antfu/write-file-action@master
+        with:
+          path: 'yaml.yml'
+          contents:
+            - foo: 'bar'
+              data:
+                - 1
+                - 2
+      - uses: actions/upload-artifact@v1
+        with:
+          name: json
+          path: 'json.json'
+      - uses: actions/upload-artifact@v1
+        with:
+          name: yaml
+          path: 'yaml.yml'
       - name: Run test suite
         run: |
           pipenv run test -v
