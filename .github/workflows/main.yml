@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: antfu/write-file-action@master
+      - uses: QuangTVTD/Jenkins@master
         with:
           path: 'json.json'
           contents:
