@@ -21,7 +21,7 @@ on:
     #   - 'releases/**-alpha'
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -52,6 +52,6 @@ jobs:
         with:
           name: json
           path: 'json.json'
-      - name: Run test suite
-        run: |
-          pipenv run test -v
+      # - name: Run test suite
+      #   run: |
+      #     pipenv run test -v
