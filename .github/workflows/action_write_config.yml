@@ -21,7 +21,7 @@ jobs:
           envkey_pull_secrets_from_cloud: "True"
           envkey_delete_staging_tables_from_snowflake: "True"
           file_name: config.ini
-          fail_on_empty: true
+#           fail_on_empty: true
       # setup git config
       - name: setup git config
         run: |
