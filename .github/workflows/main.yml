@@ -46,7 +46,8 @@ jobs:
       - uses: antfu/write-file-action@master
         with:
           path: 'json.json'
-          contents:
+          data: 
+            foo: 'bar'
             hello: 'world'
       - uses: actions/upload-artifact@v1
         with:
