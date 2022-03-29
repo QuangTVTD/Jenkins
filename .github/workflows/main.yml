@@ -48,22 +48,10 @@ jobs:
           path: 'json.json'
           contents:
             hello: 'world'
-      - uses: antfu/write-file-action@master
-        with:
-          path: 'yaml.yml'
-          contents:
-            - foo: 'bar'
-              data:
-                - 1
-                - 2
       - uses: actions/upload-artifact@v1
         with:
           name: json
           path: 'json.json'
-      - uses: actions/upload-artifact@v1
-        with:
-          name: yaml
-          path: 'yaml.yml'
       - name: Run test suite
         run: |
           pipenv run test -v
