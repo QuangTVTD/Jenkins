@@ -1,4 +1,4 @@
-name: Commit date to master
+name: Write config fle
 on: push
 jobs:
   write_config:
@@ -8,11 +8,19 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: save current date
-        run: |
-          # do some operation that changes a file in the git repo
-          name=quang > config.ini
-          age=24 > config.ini
+#       - name: save current date
+#         run: |
+#           # do some operation that changes a file in the git repo
+#           name=quang > config.ini
+#           age=24 > config.ini
+      - name: write config
+        with:
+          envkey_DEBUG: false
+          envkey_SOME_API_KEY: "123456abcdef"
+          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          some_other_variable: foobar
+          file_name: config.ini
+          fail_on_empty: false
 
       - name: setup git config
         run: |
@@ -24,5 +32,5 @@ jobs:
         run: |
           # Stage the file, commit and push
           git add config.ini
-          git commit -m "new date commit"
+          git commit -m "create config file"
           git push origin main
