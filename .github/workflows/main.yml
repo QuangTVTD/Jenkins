@@ -15,15 +15,15 @@ jobs:
         with:
           path: 'json.json'
           contents:
-            hello: 'world'
+            - hello: 'world'
       - uses: antfu/write-file-action@master
         with:
           path: 'yaml.yml'
           contents:
-            foo: 'bar'
-            data:
-              - 1
-              - 2
+            - foo: 'bar'
+            - data:
+                - 1
+                - 2
       - uses: actions/upload-artifact@v1
         with:
           name: json
