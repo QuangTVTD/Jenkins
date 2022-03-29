@@ -1,4 +1,4 @@
-name: Write config fle
+name: workflows
 on:
   push:
     branches:
@@ -13,6 +13,7 @@ jobs:
       # Checkout the branch
       - name: checkout
         uses: actions/checkout@v2
+      # write config file
       - name: write config
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -21,16 +22,30 @@ jobs:
           envkey_delete_staging_tables_from_snowflake: "True"
           file_name: config.ini
           fail_on_empty: false
-
+      # setup git config
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
           git config user.name "GitHub Actions Bot"
           git config user.email "<Test@gmail.com>"
-
+      # commit new config to repo
       - name: commit
         run: |
           # Stage the file, commit and push
           git add config.ini
           git commit -m "create config file"
           git push origin main
+      # create Docker images and push into a ECR repository
+      - name: build and push to ECR repository
+        uses: docker://ghcr.io/kciter/aws-ecr-action:latest
+        with:
+          access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          repo: docker/repo
+          region: ap-northeast-2
+          tags: latest,${{ github.sha }}
+          create_repo: true
+          image_scanning_configuration: true
+          set_repo_policy: true
+          repo_policy_file: repo-policy.json
