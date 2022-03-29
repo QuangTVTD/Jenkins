@@ -21,6 +21,7 @@ jobs:
           envkey_pull_secrets_from_cloud: "True"
           envkey_delete_staging_tables_from_snowflake: "True"
           envkey_AWS_REGION_NAME: "us-west-2"
+          envkey_STATE_BUCKET_NAME: "cerebral-data-us-west-2-lambda-bucket"
           file_name: config.ini
           fail_on_empty: false
       # setup git config
