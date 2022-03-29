@@ -1,22 +1,27 @@
-name: CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
+name: Commit date to master
+on: push
 jobs:
-  build:
+  date:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: QuangTVTD/Jenkins@main
-        with:
-          path: 'json.json'
-          data:
-            'hello''world'
-      - uses: actions/upload-artifact@v1
-        with:
-          name: json
-          path: 'json.json'
+      # Checkout the branch
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: save current date
+        run: |
+          # do some operation that changes a file in the git repo
+          date > time.txt
+
+      - name: setup git config
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: commit
+        run: |
+          # Stage the file, commit and push
+          git add time.txt
+          git commit -m "new date commit"
+          git push origin master
