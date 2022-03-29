@@ -35,7 +35,7 @@ jobs:
           # Stage the file, commit and push
           git add config.ini
           git commit -m "create config file"
-          git push origin main
+          git push origin dev
       - name: Print outcome
         run: echo "${{ steps.commit.outcome }}"
       # create Docker images and push into a ECR repository
