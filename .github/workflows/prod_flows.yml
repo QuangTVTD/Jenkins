@@ -17,11 +17,12 @@ jobs:
       - name: write config
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          envkey_max_simultaneous_api_calls: 1000
-          envkey_pull_secrets_from_cloud: "True"
-          envkey_delete_staging_tables_from_snowflake: "True"
-          envkey_AWS_REGION_NAME: "us-west-2"
-          envkey_STATE_BUCKET_NAME: "cerebral-data-us-west-2-lambda-bucket"
+          envkey_env: dev
+#           envkey_max_simultaneous_api_calls: 1000
+#           envkey_pull_secrets_from_cloud: "True"
+#           envkey_delete_staging_tables_from_snowflake: "True"
+#           envkey_AWS_REGION_NAME: "us-west-2"
+#           envkey_STATE_BUCKET_NAME: "cerebral-data-us-west-2-lambda-bucket"
           file_name: config.ini
           fail_on_empty: false
       # setup git config
